@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+const Fireball = preload("res://Fireball.tscn")
+
 const DAMP = 10.0
 const MASS = 100.0
 const GRAVITY = 200.0
@@ -14,7 +16,13 @@ var trail: Particles2D
 
 func _ready():
 	trail = get_child(0)
-	
+
+func _input(event):
+	if event.is_action_pressed("shoot"):
+		var fb = Fireball.instance()
+		fb.position = position
+		fb.position.x += 16
+		get_parent().get_parent().add_child(fb)
 
 func _physics_process(delta):
 	velocity.y += delta * GRAVITY + MASS
