@@ -6,7 +6,7 @@ const DAMP = 10.0
 const MASS = 100.0
 const GRAVITY = 200.0
 const JUMP_SPEED = 1000.0
-const WALK_SPEED = 90.0
+const WALK_SPEED = 100.0
 const ACCELERATION = 0.2
 const MAX_WALK_SPEED = 400.0
 
@@ -44,10 +44,12 @@ func _physics_process(delta):
 	if direction == 0 and is_on_floor():
 		if velocity.x > 0:
 			velocity.x -= DAMP
+			if velocity.x < 0:
+				velocity.x = 0
 		elif velocity.x < 0:
 			velocity.x += DAMP
-		else:
-			velocity.x = 0
+			if velocity.x > 0:
+				velocity.x = 0
 	else:
 		velocity.x += direction * (WALK_SPEED * ACCELERATION)
 	
