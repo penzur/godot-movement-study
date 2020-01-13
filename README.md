@@ -1,5 +1,1 @@
-# GODOT Engine Movement Study
-
-proper physics movement study with godot engine
-
-![study](./study.gif)
+### Exploring physics-based movement with Godot game engine.
