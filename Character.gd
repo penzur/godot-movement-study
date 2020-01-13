@@ -43,13 +43,9 @@ func _physics_process(delta):
 	# then we decelerate
 	if direction == 0 and is_on_floor():
 		if velocity.x > 0:
-			velocity.x -= DAMP
-			if velocity.x < 0:
-				velocity.x = 0
+			velocity.x = max(0, velocity.x - DAMP)
 		elif velocity.x < 0:
-			velocity.x += DAMP
-			if velocity.x > 0:
-				velocity.x = 0
+			velocity.x = min(0, velocity.x + DAMP)
 	else:
 		velocity.x += direction * (WALK_SPEED * ACCELERATION)
 	
