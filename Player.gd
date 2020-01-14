@@ -9,6 +9,7 @@ const JUMP_SPEED = 1000.0
 const WALK_SPEED = 100.0
 const ACCELERATION = 0.2
 const MAX_WALK_SPEED = 400.0
+const MAX_FALL_TIME = 3.0
 
 var velocity = Vector2()
 var is_jumping = false
@@ -31,7 +32,8 @@ func _physics_process(delta):
 		is_jumping = true
 		velocity.y = -JUMP_SPEED
 	elif is_jumping and is_on_floor():
-		is_jumping = false
+		$Timer.stop()
+		is_jumping = false  
 	
 	var direction = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	if direction != 0 or !is_on_floor():
@@ -56,3 +58,14 @@ func _physics_process(delta):
 	# add max walk speed
 	velocity.x = clamp(velocity.x, -MAX_WALK_SPEED, MAX_WALK_SPEED)
 	velocity = move_and_slide(velocity, Vector2(0, -1))
+	
+	if !is_on_floor() && $Timer.time_left == 0:
+		$Timer.start(MAX_FALL_TIME)
+
+func _on_Timer_timeout():
+	if !is_on_floor():
+		$Timer.stop()
+		position = Vector2(0, 0) # Reset position
+		velocity = Vector2.ZERO # Reset velocity
+		get_tree().change_scene("res://GameOver.tscn")
+

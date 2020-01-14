@@ -16,8 +16,16 @@ _global_script_class_icons={
 [application]
 
 config/name="movement_study"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://UI.tscn"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.png"
+
+[display]
+
+window/size/resizable=false
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [input]
 
@@ -55,5 +63,5 @@ shoot={
 
 [rendering]
 
-environment/default_clear_color=Color( 0, 0, 0, 1 )
+environment/default_clear_color=Color( 0.0588235, 0.00784314, 0.00784314, 1 )
 environment/default_environment="res://default_env.tres"
