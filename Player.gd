@@ -32,7 +32,6 @@ func _physics_process(delta):
 		is_jumping = true
 		velocity.y = -JUMP_SPEED
 	elif is_jumping and is_on_floor():
-		$Timer.stop()
 		is_jumping = false  
 	
 	var direction = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -61,6 +60,8 @@ func _physics_process(delta):
 	
 	if !is_on_floor() && $Timer.time_left == 0:
 		$Timer.start(MAX_FALL_TIME)
+	elif is_on_floor():
+		$Timer.stop()
 
 func _on_Timer_timeout():
 	if !is_on_floor():
