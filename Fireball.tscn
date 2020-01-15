@@ -2,20 +2,20 @@
 
 [ext_resource path="res://Fireball.gd" type="Script" id=1]
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.0740741, 0.192593, 0.355556, 0.577778, 0.6 )
 colors = PoolColorArray( 0.992188, 0.977351, 0.972809, 1, 1, 1, 1, 1, 0.953723, 0.960938, 0.0375366, 1, 0.523438, 0.0184021, 0.0184021, 1, 1, 0.29248, 0.015625, 1, 0.226562, 0.211517, 0.211517, 1 )
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="Curve" id=6]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.962025, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=7]
-curve = SubResource( 6 )
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=8]
+[sub_resource type="ParticlesMaterial" id=5]
 lifetime_randomness = 1.0
 emission_shape = 1
 emission_sphere_radius = 1.0
@@ -33,10 +33,10 @@ radial_accel_random = 1.0
 angle = 180.0
 angle_random = 1.0
 scale = 14.0
-scale_curve = SubResource( 7 )
-color_ramp = SubResource( 5 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
 
-[sub_resource type="CircleShape2D" id=9]
+[sub_resource type="CircleShape2D" id=6]
 
 [node name="Fireball" type="Area2D"]
 position = Vector2( 53.2732, 14.2696 )
@@ -46,9 +46,9 @@ script = ExtResource( 1 )
 position = Vector2( -4.77725, 0.233784 )
 amount = 20
 speed_scale = 3.75
-process_material = SubResource( 8 )
+process_material = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -6.1301, 0 )
-shape = SubResource( 9 )
+position = Vector2( -3.06504, 0.340561 )
+shape = SubResource( 6 )
 [connection signal="body_entered" from="." to="." method="_on_Fireball_body_entered"]

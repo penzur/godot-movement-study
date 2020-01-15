@@ -14,6 +14,7 @@ const MAX_FALL_TIME = 3.0
 var velocity = Vector2()
 var is_jumping = false
 var trail: Particles2D
+var shoot_direction = 1
 
 func _ready():
 	trail = get_child(0)
@@ -22,9 +23,19 @@ func _input(event):
 	if event.is_action_pressed("shoot"):
 		var fb = Fireball.instance()
 		fb.position = position
-		fb.position.x += 16
+		fb.direction = shoot_direction
 		get_parent().get_parent().add_child(fb)
-
+	if Input.is_action_just_pressed("move_left"):
+		if shoot_direction == -1:
+			return
+		shoot_direction = -1
+		$Char.scale.x *= -1
+	elif Input.is_action_just_pressed("move_right"):
+		if shoot_direction == 1:
+			return
+		shoot_direction = 1
+		$Char.scale.x *= -1
+	
 func _physics_process(delta):
 	velocity.y += delta * GRAVITY + MASS
 	
